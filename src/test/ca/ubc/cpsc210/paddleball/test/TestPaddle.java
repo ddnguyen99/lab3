@@ -2,6 +2,7 @@ package ca.ubc.cpsc210.paddleball.test;
 
 import ca.ubc.cpsc210.paddleball.model.PBG;
 import ca.ubc.cpsc210.paddleball.model.Puddle;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,11 +29,11 @@ class TestPaddle {
 	void testUpdate() {
 		final int NUM_UPDATES = 8;
 		
-		p.Move();
+		p.move();
 		assertEquals(XLOC + Puddle.DX, p.getX());
 		
 		for(int count = 1; count < NUM_UPDATES; count++) {
-			p.Move();
+			p.move();
 		}
 		
 		assertEquals(XLOC + NUM_UPDATES * Puddle.DX, p.getX());
@@ -40,33 +41,33 @@ class TestPaddle {
 	
 	@Test
 	void testFlipDirection() {
-		p.Move();
+		p.move();
 		assertEquals(XLOC + Puddle.DX, p.getX());
-		p.L();
-		p.Move();
+		p.moveL();
+		p.move();
 		assertEquals(XLOC, p.getX());
-		p.R();
-		p.Move();
+		p.moveR();
+		p.move();
 		assertEquals(XLOC + Puddle.DX, p.getX());
 	}
 	
 	@Test 
 	void testLeftBoundary() {
-		p.L();
+		p.moveL();
 		for(int count = 0; count < (PBG.DIMENSION1 / 2 - Puddle.DIMENSION1 / 2) / Puddle.DX + 1; count++)
-			p.Move();
+			p.move();
 		assertEquals(Puddle.DIMENSION1 / 2, p.getX());
-		p.Move();
+		p.move();
 		assertEquals(Puddle.DIMENSION1 / 2, p.getX());
 	}
 	
 	@Test
 	void testRightBoundary() {
-		p.R();
+		p.moveR();
 		for(int count = 0; count < (PBG.DIMENSION1 / 2 - Puddle.DIMENSION1 / 2) / Puddle.DX + 1; count++)
-			p.Move();
+			p.move();
 		assertEquals(PBG.DIMENSION1 - Puddle.DIMENSION1 / 2, p.getX());
-		p.Move();
+		p.move();
 		assertEquals(PBG.DIMENSION1 - Puddle.DIMENSION1 / 2, p.getX());
 	}
 }
