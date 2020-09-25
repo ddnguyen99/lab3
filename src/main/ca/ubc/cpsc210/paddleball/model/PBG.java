@@ -13,17 +13,18 @@ public class PBG {
     private static final Random RND = new Random();
 
     private Ball ball;
-    private Puddle puddle;
+    private Paddle paddle;
     private boolean stop;
 
     // Constructs a Paddle Ball Game
     // EFFECTS:  creates ball at random location at top of screen
+
     public PBG() {
         setUp();
     }
 
-    public Puddle getPaddle() {
-        return puddle;
+    public Paddle getPaddle() {
+        return paddle;
     }
 
     public Ball getBall() {
@@ -39,12 +40,13 @@ public class PBG {
     // Updates the game on clock tick
     // MODIFIES: this
     // EFFECTS:  updates ball, paddle and game over status
+
     public void update() {
         ball.move();
-        puddle.move();
+        paddle.move();
 
-        checkHitSomething();
-        checkStyle();
+        checkHitPaddle();
+        checkHitGround();
     }
 
     // Responds to key press codes
@@ -70,7 +72,7 @@ public class PBG {
 
     private void setUp() {
         ball = new Ball(RND.nextInt(PBG.DIMENSION1), Ball.SIZE / 2);
-        puddle = new Puddle(DIMENSION1 / 2);
+        paddle = new Paddle(DIMENSION1 / 2);
         stop = false;
     }
 
@@ -80,10 +82,10 @@ public class PBG {
 
     private void paddleControl(int keyCode) {
         if (keyCode == KeyEvent.VK_KP_LEFT || keyCode == KeyEvent.VK_LEFT) {
-            puddle.moveL();
+            paddle.moveL();
         } else {
             if (keyCode == KeyEvent.VK_KP_RIGHT || keyCode == KeyEvent.VK_RIGHT) {
-                puddle.moveR();
+                paddle.moveR();
             }
         }
     }
@@ -92,8 +94,8 @@ public class PBG {
     // MODIFIES: this
     // EFFECTS:  bounces ball if it collides with paddle
 
-    private void checkHitSomething() {
-        if (ball.doSomething(puddle)) {
+    private void checkHitPaddle() {
+        if (ball.touchPaddle(paddle)) {
             ball.bounceOffPaddle();
         }
     }
@@ -102,7 +104,7 @@ public class PBG {
     // MODIFIES: this
     // EFFECTS:  if ball has hit ground, game is marked as over
 
-    private void checkStyle() {
+    private void checkHitGround() {
         if (ball.getY() > DIMENSION2) {
             stop = true;
         }

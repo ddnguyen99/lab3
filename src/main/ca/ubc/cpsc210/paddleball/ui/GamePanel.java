@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import ca.ubc.cpsc210.paddleball.model.PBG;
 import ca.ubc.cpsc210.paddleball.model.Ball;
-import ca.ubc.cpsc210.paddleball.model.Puddle;
+import ca.ubc.cpsc210.paddleball.model.Paddle;
 /*
  * The panel in which the game is rendered.
  */
@@ -54,13 +54,13 @@ public class GamePanel extends JPanel {
     // MODIFIES: g
     // EFFECTS:  draws the tank onto g
     private void drawPaddle(Graphics g) {
-        Puddle t = game.getPaddle();
+        Paddle t = game.getPaddle();
         Color savedCol = g.getColor();
-        g.setColor(Puddle.COLOR);
-        g.fillRect(t.getX() - Puddle.DIMENSION1 / 2,
-                Puddle.Y_POS - Puddle.DIMENSION2 / 2,
-                Puddle.DIMENSION1,
-                Puddle.DIMENSION2);
+        g.setColor(Paddle.COLOR);
+        g.fillRect(t.getX() - Paddle.DIMENSION1 / 2,
+                Paddle.Y_POS - Paddle.DIMENSION2 / 2,
+                Paddle.DIMENSION1,
+                Paddle.DIMENSION2);
         g.setColor(savedCol);
     }
 

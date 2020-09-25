@@ -59,19 +59,20 @@ public class Ball {
         getCordX = getCordX + getVelocityX;
         getCordY = getCordY + getVelocityY;
 
-        dealWithIt();
+        constrainsBall();
     }
 
     // Determines if this ball has collided with the paddle
     // EFFECTS:  returns true if this ball has collided with paddle p,
     //           false otherwise
-    public boolean doSomething(Puddle p) {
+
+    public boolean touchPaddle(Paddle p) {
         Rectangle ballBoundingRectangle = new Rectangle(getX() - SIZE / 2, getY() - SIZE / 2, SIZE, SIZE);
         Rectangle paddleBoundingRectangle = new Rectangle(
-                p.getX() - Puddle.DIMENSION1 / 2,
-                Puddle.Y_POS - Puddle.DIMENSION2 / 2,
-                Puddle.DIMENSION1,
-                Puddle.DIMENSION2);
+                p.getX() - Paddle.DIMENSION1 / 2,
+                Paddle.Y_POS - Paddle.DIMENSION2 / 2,
+                Paddle.DIMENSION1,
+                Paddle.DIMENSION2);
         return ballBoundingRectangle.intersects(paddleBoundingRectangle);
     }
 
@@ -79,7 +80,7 @@ public class Ball {
     // MODIFIES: this
     // EFFECTS: ball is constrained to bounce off top and vertical walls
 
-    private void dealWithIt() {
+    private void constrainsBall() {
         if (getX() - SIZE / 2 < 0) {
             getCordX = (double) SIZE / 2;
             getVelocityX *= -1;

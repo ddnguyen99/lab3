@@ -1,7 +1,7 @@
 package ca.ubc.cpsc210.paddleball.test;
 
 import ca.ubc.cpsc210.paddleball.model.Ball;
-import ca.ubc.cpsc210.paddleball.model.Puddle;
+import ca.ubc.cpsc210.paddleball.model.Paddle;
 import ca.ubc.cpsc210.paddleball.model.PBG;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,30 +60,30 @@ class TestBall {
 	
 	@Test
 	void testCollideWith() {
-		Puddle p = new Puddle(XLOC);
+		Paddle p = new Paddle(XLOC);
 
 		Ball b = new Ball(0, 0);
-		assertFalse(b.doSomething(p));
+		assertFalse(b.touchPaddle(p));
 
-		b = new Ball(p.getX(), Puddle.Y_POS);
-		assertTrue(b.doSomething(p));
+		b = new Ball(p.getX(), Paddle.Y_POS);
+		assertTrue(b.touchPaddle(p));
 
-		b = new Ball(p.getX() + Puddle.DIMENSION1 / 2 + Ball.SIZE / 2 - 1, Puddle.Y_POS);
-		assertTrue(b.doSomething(p));
+		b = new Ball(p.getX() + Paddle.DIMENSION1 / 2 + Ball.SIZE / 2 - 1, Paddle.Y_POS);
+		assertTrue(b.touchPaddle(p));
 
-		b = new Ball(p.getX() + Puddle.DIMENSION1 / 2 + Ball.SIZE / 2, Puddle.Y_POS);
-		assertFalse(b.doSomething(p));
+		b = new Ball(p.getX() + Paddle.DIMENSION1 / 2 + Ball.SIZE / 2, Paddle.Y_POS);
+		assertFalse(b.touchPaddle(p));
 
-		b = new Ball(p.getX() - Puddle.DIMENSION1 / 2 - Ball.SIZE / 2 + 1, Puddle.Y_POS);
-		assertTrue(b.doSomething(p));
+		b = new Ball(p.getX() - Paddle.DIMENSION1 / 2 - Ball.SIZE / 2 + 1, Paddle.Y_POS);
+		assertTrue(b.touchPaddle(p));
 
-		b = new Ball(p.getX() - Puddle.DIMENSION1 / 2 - Ball.SIZE / 2, Puddle.Y_POS);
-		assertFalse(b.doSomething(p));
+		b = new Ball(p.getX() - Paddle.DIMENSION1 / 2 - Ball.SIZE / 2, Paddle.Y_POS);
+		assertFalse(b.touchPaddle(p));
 
-		b = new Ball(p.getX(), Puddle.Y_POS - Puddle.DIMENSION2 / 2 - Ball.SIZE / 2 + 1);
-		assertTrue(b.doSomething(p));
+		b = new Ball(p.getX(), Paddle.Y_POS - Paddle.DIMENSION2 / 2 - Ball.SIZE / 2 + 1);
+		assertTrue(b.touchPaddle(p));
 
-		b = new Ball(p.getX(), Puddle.Y_POS - Puddle.DIMENSION2 / 2 - Ball.SIZE / 2);
-		assertFalse(b.doSomething(p));
+		b = new Ball(p.getX(), Paddle.Y_POS - Paddle.DIMENSION2 / 2 - Ball.SIZE / 2);
+		assertFalse(b.touchPaddle(p));
 	}
 }
