@@ -6,7 +6,7 @@ import java.awt.Color;
  * Represents a paddle
  */
 
-public class Puddle {
+public class Paddle {
     public static final int DIMENSION1 = 26;  // must be even integer
     public static final int DIMENSION2 = 10;
     public static final int DX = 3;
@@ -19,7 +19,7 @@ public class Puddle {
     // Construct a paddle.
     // EFFECTS: places paddle at position (x, Y_POS) moving right.
 
-    public Puddle(int cordX) {
+    public Paddle(int cordX) {
         this.cordX = cordX;
         whichWay = 1;
     }
@@ -48,16 +48,18 @@ public class Puddle {
     // MODIFIES: this
     // EFFECTS:  paddle is moved DX units in whatever direction it is facing and is
     //           constrained to remain within boundaries of game
+
     public void move() {
         cordX = cordX + whichWay * DX;
 
-        dealWithIt();
+        constrainsPaddle();
     }
 
     // Constrains paddle so that it doesn't travel off sides of screen
     // MODIFIES: this
     // EFFECTS: paddle is constrained to remain within vertical boundaries of game
-    private void dealWithIt() {
+
+    private void constrainsPaddle() {
         if (cordX - DIMENSION1 / 2 < 0) {
             cordX = DIMENSION1 / 2;
         } else {
